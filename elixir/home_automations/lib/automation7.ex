@@ -36,32 +36,17 @@ defmodule Automation7 do
       receive do                                                          # green
         {:boiler, _id, code} when code in @codes ->                       # green
           IO.puts("boiler_event #{code}")
-          counter = udpate_counter(counter, code, :inc)                   # yellow
-          set_timer(code)
-          last_notif = check_constraints(counter, last_notif)             # yellow
-          {counter, last_notif}                                           # yellow
-        {:timer, code} ->                                                 # blue
-          counter = udpate_counter(counter, code, :dec)                   # yellow
-          {counter, last_notif}                                           # yellow
-      end                                                                 # green
+          {_, counter} = Map.get_and_update(counter, code, fn val -> {val, val+1} end)      # yellow
+          Process.send_after(self(), {:timer, code}, 5000) # 1 hour = 3.600.000 ms          # blue
+          last_notif = check_constraints(counter, last_notif)                               # yellow
+          {counter, last_notif}                                                             # yellow
+        {:timer, code} ->                                                                   # blue
+          {_, counter} = Map.get_and_update(counter, code, fn val -> {val,  val-1 } end)     # yellow
+          {counter, last_notif}                                                             # yellow
+      end                                                                                   # green
 
-    loop(state)                                                           # yellow
+    loop(state)                                                                             # yellow
   end
-
-  defp udpate_counter(counter, code, :inc) do                                        # yellow
-    {_, counter} = Map.get_and_update(counter, code, fn val -> {val, val+1} end)    # yellow
-    counter                                                                         # yellow
-  end                                                                               # yellow
-
-  defp udpate_counter(counter, code, :dec) do                                        # yellow
-     {_, counter} = Map.get_and_update(counter, code, fn val -> {val,  val-1 } end) # yellow
-     counter                                                                        # yellow
-  end                                                                               # yellow
-
-  defp set_timer(code) do                                                            # blue
-    Process.send_after(self(), {:timer, code}, 5000) # 1 hour = 3.600.000 ms        # blue
-  end                                                                               # blue
-
 
   defp check_constraints(counter, last_notif) do                                      # green
     case counter.fhs_failure >= 3 and counter.is_failure >= 1 do                      # green
