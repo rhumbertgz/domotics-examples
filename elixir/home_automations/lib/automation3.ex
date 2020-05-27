@@ -30,7 +30,7 @@ defmodule Automation3 do
         :time_alert ->                                                # green
           IO.puts("time_alert_window_opened_bathroom")
           {nil, window_status}                                        # yellow
-      end                                                             # green
+      end                                                             
 
     loop(state)                                                       # yellow
   end

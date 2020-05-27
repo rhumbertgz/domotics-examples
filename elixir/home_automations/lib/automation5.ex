@@ -31,8 +31,8 @@ defmodule Automation5 do
           if Timex.before?(Timex.shift(m_door_dt, seconds: -60), m_hall) do           # blue
             if Timex.after?(m_door_dt, c_door) and Timex.after?(c_door, m_hall) do    # purple
               IO.puts("code logic for leaving home")
-            end                                                                       # purple
-          end                                                                         # blue
+            end
+          end
 
           {m_door_dt, m_hall, c_door}                                                 # yellow
 
@@ -41,16 +41,16 @@ defmodule Automation5 do
           if Timex.before?(Timex.shift(m_hall_dt, seconds: -60), m_door) do           # blue
             if Timex.after?(m_hall_dt, c_door) and Timex.after?(c_door, m_door) do    # purple
               IO.puts("code logic for arriving home")
-            end                                                                       # purple
-          end                                                                         # blue
+            end
+          end
 
           {m_door, m_hall_dt, c_door}                                                 # yellow
 
         {:contact, _id, :open, :front_door, dt} ->                                    # green
           IO.puts("contact_front_door")
           {m_door, m_hall, dt}                                                        # yellow
-      end                                                                             # green
+      end
 
-    loop(state)                                                                         # yellow
+    loop(state)                                                                       # yellow
   end
 end

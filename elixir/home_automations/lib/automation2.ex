@@ -22,7 +22,7 @@ defmodule Automation2 do
             case light_status == :on do                           # green
              true -> set_timer(timer_ref)
              false -> timer_ref                                   # yellow
-            end                                                   # green
+            end
           {timer_ref, light_status}                               # yellow
 
         {:light, _id, value, :bathroom} ->                        # green
@@ -31,14 +31,14 @@ defmodule Automation2 do
             case value == :on do                                  # green
               true -> set_timer(timer_ref)
               false -> timer_ref                                  # yellow
-            end                                                   # green
+            end
           {timer_ref, value}                                      # yellow
 
         :no_motion ->                                             # green
           IO.puts("no_motion_bathroom")
           # Turn off the lights
           {nil, :off}                                             # yellow
-      end                                                         # green
+      end
 
     loop(state)                                                   # yellow
   end
@@ -48,5 +48,5 @@ defmodule Automation2 do
     IO.puts "reset timer"
     Process.cancel_timer(timer_ref)                                                           # blue
     Process.send_after(self(), :no_motion, 5000)                                              # blue
-  end                                                                                         # blue
+  end                                                                                        
 end

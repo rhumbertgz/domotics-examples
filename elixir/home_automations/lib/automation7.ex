@@ -41,9 +41,9 @@ defmodule Automation7 do
           last_notif = check_constraints(counter, last_notif)                               # yellow
           {counter, last_notif}                                                             # yellow
         {:timer, code} ->                                                                   # blue
-          {_, counter} = Map.get_and_update(counter, code, fn val -> {val,  val-1 } end)     # yellow
+          {_, counter} = Map.get_and_update(counter, code, fn val -> {val,  val-1 } end)    # yellow
           {counter, last_notif}                                                             # yellow
-      end                                                                                   # green
+      end
 
     loop(state)                                                                             # yellow
   end
@@ -56,9 +56,9 @@ defmodule Automation7 do
             IO.puts "Sending notification..."
             Timex.now()                                                               # yellow
           false -> last_notif                                                         # yellow
-        end                                                                           # blue
+        end
       false -> last_notif                                                             # yellow
-    end                                                                               # green                                                                   # green
-  end                                                                                 # green
+    end                                                                               
+  end
 
 end

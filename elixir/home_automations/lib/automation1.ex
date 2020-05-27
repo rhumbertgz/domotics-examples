@@ -35,7 +35,7 @@ defmodule Automation1 do
                 {ambient_light, :on}                              # yellow
 
               false -> {ambient_light, :off}                      # yellow
-          end                                                     # green
+          end
 
         {:ambient_light, _id, value, :bathroom} ->                # green
           IO.puts("ambient_light_bathroom")
@@ -44,7 +44,7 @@ defmodule Automation1 do
         {:light, _id, value, :bathroom} ->                        # green
           IO.puts("ambient_light_bathroom")
           {ambient_light, value}                                   # yellow
-      end                                                         # green
+      end                                                         
 
     loop(state)                                                   # yellow
   end

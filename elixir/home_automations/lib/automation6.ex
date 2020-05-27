@@ -29,6 +29,7 @@ defmodule Automation6 do
       receive do                                                         # green
         {:daily_consumption, _id, value} when counter <=4 -> # 20 reads  # green
           { counter+1, values ++ [value]}                                # yellow
+
         {:daily_consumption, _id, value} when counter < 5 -> # 21 reads  # green
           values = values ++ [value]                                     # yellow
           check_consumption(values)
@@ -39,7 +40,7 @@ defmodule Automation6 do
           values = rest ++ [value]                                        # yellow
           check_consumption(values)
           {counter, values}                                               # yellow
-      end                                                                 # green
+      end
 
     loop(state)                                                           # yellow
   end
@@ -48,8 +49,8 @@ defmodule Automation6 do
     consumption = Enum.reduce(values, 0, fn i, acc -> i+acc end)          # yellow
     if consumption > 200 do                                               #green
       IO.puts "send notification"
-    end                                                                   #green
-  end                                                                     #green
+    end
+  end
 
 
 end

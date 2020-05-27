@@ -29,8 +29,8 @@ defmodule Automation4 do
                 IO.puts "Ring"
                 Timex.now()                                                           # yellow
               false -> last_ring                                                      # yellow
-          end                                                                         # blue
-      end                                                                             # green
+          end                                                                        
+      end
 
     loop(state)                                                                       # yellow
   end
