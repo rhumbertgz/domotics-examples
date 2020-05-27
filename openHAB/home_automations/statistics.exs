@@ -1,4 +1,3 @@
-# automations = ['automation1', 'automation2', 'automation3', 'automation4', 'automation5', 'automation6',  'automation7']
 automations = ['automation1', 'automation2', 'automation3', 'automation4', 'automation5','automation6','automation7']
 
 
